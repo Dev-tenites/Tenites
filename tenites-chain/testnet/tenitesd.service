@@ -1,0 +1,23 @@
+[Unit]
+Description=Tenites Blockchain Node
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+User=tenites
+ExecStart=/usr/local/bin/tenitesd start \
+  --home /home/tenites/.tenitesd \
+  --keyring-backend file \
+  --log_level info \
+  --minimum-gas-prices 0.001utsc \
+  --p2p.laddr tcp://0.0.0.0:26656 \
+  --rpc.laddr tcp://0.0.0.0:26657 \
+  --grpc.address 0.0.0.0:9090
+Restart=on-failure
+RestartSec=10
+LimitNOFILE=65535
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

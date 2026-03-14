@@ -1,0 +1,67 @@
+[global]
+log_level = "info"
+
+[mode]
+
+[mode.clients]
+enabled = true
+refresh = true
+misbehaviour = true
+
+[mode.connections]
+enabled = true
+
+[mode.channels]
+enabled = true
+
+[mode.packets]
+enabled = true
+clear_interval = 100
+
+[[chains]]
+id = "tenites-testnet-1"
+type = "CosmosSdk"
+rpc_addr = "https://rpc.tenites-testnet.io"
+grpc_addr = "https://grpc.tenites-testnet.io:443"
+rpc_timeout = "10s"
+account_prefix = "tenites"
+key_name = "tenites-relayer"
+key_store_type = "Test"
+store_prefix = "ibc"
+default_gas = 100000
+max_gas = 3000000
+gas_price = { price = 0.001, denom = "utsc" }
+gas_multiplier = 1.2
+max_msg_num = 30
+max_tx_size = 2097152
+clock_drift = "5s"
+max_block_time = "30s"
+trusting_period = "14days"
+trust_threshold = { numerator = "1", denominator = "3" }
+
+[chains.packet_filter]
+policy = "allow"
+list = [
+  ["transfer", "*"],
+]
+
+[[chains]]
+id = "osmo-test-5"
+type = "CosmosSdk"
+rpc_addr = "https://rpc.testnet.osmosis.zone"
+grpc_addr = "https://grpc.testnet.osmosis.zone:443"
+rpc_timeout = "10s"
+account_prefix = "osmo"
+key_name = "osmo-relayer"
+key_store_type = "Test"
+store_prefix = "ibc"
+default_gas = 300000
+max_gas = 5000000
+gas_price = { price = 0.025, denom = "uosmo" }
+gas_multiplier = 1.2
+max_msg_num = 30
+max_tx_size = 2097152
+clock_drift = "5s"
+max_block_time = "30s"
+trusting_period = "14days"
+trust_threshold = { numerator = "1", denominator = "3" }
